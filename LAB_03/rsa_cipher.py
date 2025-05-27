@@ -1,10 +1,9 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
-from LAB_03.caesar_cipher import MyApp
 from ui.rsa import Ui_MainWindow
 import requests
 
-class RSACipher:
+class MyApp(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
