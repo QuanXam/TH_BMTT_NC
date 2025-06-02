@@ -63,16 +63,11 @@ def handle_client(client_socket, client_address):
             if decrypted_message.lower() == "exit":
                 break
 
-            # Gửi lại phản hồi cho chính client
-            response = f"Đã nhận: {decrypted_message}"
-            encrypted_response = encrypt_message(aes_key, response)
-            client_socket.send(encrypted_response)
-
-            # (Tùy chọn) Gửi đến các client khác
-            # for client, key in clients:
-            #     if client != client_socket:
-            #         encrypted = encrypt_message(key, decrypted_message)
-            #         client.send(encrypted)
+            # Send received message to all other clients
+            for client, key in clients:
+                if client != client_socket:
+                    encrypted = encrypt_message(key, decrypted_message)
+                    client.send(encrypted)
 
     except Exception as e:
         print(f"Error with {client_address}: {e}")
