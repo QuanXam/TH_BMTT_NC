@@ -23,11 +23,11 @@ def handle_client(client_socket):
 
             # Gửi dữ liệu đến tất cả các client khác
             for client in clients:
-                if client != client_socket:
-                    try:
-                        client.send(data)
-                    except:
-                        clients.remove(client)
+                try:
+                    client.send(data)
+                except:
+                    clients.remove(client)
+
     except:
         clients.remove(client_socket)
     finally:
